@@ -415,11 +415,11 @@ class ExpArgs:
         try:
             logger.info(f"Running experiment {self.exp_name} in:\n  {self.exp_dir}")
             agent = self.agent_args.make_agent()
-            
+
             # Set training data directory for agents that support it
-            if hasattr(agent, 'set_training_data_dir'):
+            if hasattr(agent, "set_training_data_dir"):
                 agent.set_training_data_dir(Path(self.exp_dir))
-            
+
             if hasattr(agent, "set_task_name"):
                 agent.set_task_name(self.env_args.task_name)
 
@@ -441,11 +441,11 @@ class ExpArgs:
 
             while not step_info.is_done:  # set a limit
                 logger.debug(f"Starting step {step_info.step}.")
-                
+
                 # Set current step for training data capture
-                if hasattr(agent, 'set_current_step'):
+                if hasattr(agent, "set_current_step"):
                     agent.set_current_step(step_info.step)
-                
+
                 action = step_info.from_action(agent)
                 logger.debug(f"Agent chose action:\n {action}")
 
